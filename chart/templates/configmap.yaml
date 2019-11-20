@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "bugzilla.fullname" . }}
+  labels:
+    app: {{ template "bugzilla.name" . }}
+    chart: {{ template "bugzilla.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  localconfig: |
+    $create_htaccess = {{ .Values.bugzilla.create_htaccess }};
+    $webservergroup = {{ .Values.bugzilla.webservergroup | quote }};
+    $use_suexec = {{ .Values.bugzilla.use_suexec }};
+    $db_driver = {{ .Values.bugzilla.db_driver | quote }};
+    $db_host = {{ .Values.bugzilla.db_host | quote }};
+    $db_name = {{ .Values.bugzilla.db_name | quote }};
+    $db_user = {{ .Values.bugzilla.db_user | quote }};
+    $db_pass = {{ .Values.bugzilla.db_pass | quote }};
+    $db_port = {{ .Values.bugzilla.db_port }};
+    $db_sock = {{ .Values.bugzilla.db_sock | quote }};
+    $db_check = {{ .Values.bugzilla.db_check }};
+    $db_mysql_ssl_ca_file = {{ .Values.bugzilla.db_mysql_ssl_ca_file | quote }};
+    $db_mysql_ssl_ca_path = {{ .Values.bugzilla.db_mysql_ssl_ca_path | quote }};
+    $db_mysql_ssl_client_cert = {{ .Values.bugzilla.db_mysql_ssl_client_cert | quote }};
+    $db_mysql_ssl_client_key = {{ .Values.bugzilla.db_mysql_ssl_client_key | quote }};
+    $index_html = {{ .Values.bugzilla.index_html }};
+    $interdiffbin = {{ .Values.bugzilla.interdiffbin | quote }};
+    $diffpath = {{ .Values.bugzilla.diffpath | quote }};
+    $site_wide_secret = {{ .Values.bugzilla.site_wide_secret | quote }};

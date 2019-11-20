@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "bugzilla.fullname" . }}
+  labels:
+    app: {{ template "bugzilla.name" . }}
+    chart: {{ template "bugzilla.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "bugzilla.name" . }}
+    release: {{ .Release.Name }}
